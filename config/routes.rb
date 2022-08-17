@@ -8,7 +8,10 @@ Rails.application.routes.draw do
     # meaning: from controller Restaurants, use those resources, but only those
     # specified in only (only carries names of methods defined on Controller)
     # index, show, new, edit, create, update, and destroy
-    resources :restaurants, only: [:index, :new, :create, :show]
+    resources :restaurants, only: %i[index new create show destroy] do
+      resources :reviews, only: %i[new create]
+    end
+    resources :reviews, only: :destroy
   end
 end
 

@@ -1,8 +1,11 @@
 <h1>All restaurants!</h1>
-<div>
+<div class='center-btn'>
+  <p class='my-btn padding-hard'><%= link_to 'Add a new restaurant', new_restaurant_path %></p>
+</div>
+<div class="cards w-70">
   <% @restaurants.each do |r| %>
-    <p><%= r.name %></p>
+    <div class="card-category">
+    <%= link_to r.name, restaurant_path(r) %>
+    </div>
   <% end %>
 </div>
-
-<h3><%= link_to 'Add a new restaurant', new_restaurant_path %></h3>

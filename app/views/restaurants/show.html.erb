@@ -5,16 +5,29 @@
   <li>Address: <%= @restaurant.address %></li>
   <li>Cuisine: <%= @restaurant.category %></li>
   <li>Reviews:</li>
-  <div class="m-left div-70">
-  <% @restaurant.reviews.each do |r| %>
-  <li><%= %w(🧨 😍 🤩 🔥 🤢 🥴 😭 🌮 🥲 🤔 🙄 🥵 😵 👺 💀 🍕 🍔 🍟 🍳 🥗 🍗 🥟 🍢 🥘 🍤).sample %> <%= r.content %></li>
-  <% end %>
+  <div class="m-left w-70">
+    <p class="my-btn">
+    <%= link_to "Write a new review!",
+    new_restaurant_review_path(@restaurant) %></p>
+    <% @restaurant.reviews.each do |review| %>
+    <div class='padding-hard'>
+      <li>
+        <%= %w(😍 🤩 🔥 🤢 🥴 😭 🌮 🥲 🤔 🙄 🥵 😵 👺 💀 🍕 🍔 🍳 🥗 🍗 🥟 🥘 🍤).sample %> <%= review.content %>
+      </li>
+      <li class='it light m-left'>
+        <%= link_to "delete this review", review_path(review),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+      </li>
+    </div>
+    <% end %>
   </div>
 </ul>
 
-<li class="list-group-item">
-  <%= link_to "Delete",
-    restaurant_path(@restaurant),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-  %>
-</li>
+<div class="center-btn-lg">
+  <button class="btn btn-outline-danger m-left">
+    <%= link_to "Delete this restaurant",
+      restaurant_path(@restaurant),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    %>
+  </button>
+</div>
