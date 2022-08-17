@@ -8,6 +8,7 @@
 
 require 'faker'
 Restaurant.destroy_all
+Review.destroy_all
 
 20.times do
   Restaurant.create(
@@ -15,5 +16,23 @@ Restaurant.destroy_all
     phone_number: Faker::PhoneNumber.phone_number,
     category: %w[chinese italian japanese french belgian].sample,
     address: Faker::Address.street_address
+  )
+end
+
+i = 1
+20.times do
+  Review.create(
+    content: Faker::Restaurant.review,
+    rating: rand(1..5),
+    restaurant_id: i
+  )
+  i += 1
+end
+
+15.times do
+  Review.create(
+    content: Faker::Restaurant.review,
+    rating: rand(1..5),
+    restaurant_id: rand(1..20)
   )
 end
